@@ -8,7 +8,10 @@
 
 // ========================================================================================================
 // --- Definições ---
-#define OLED_RESET 4
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET -1
+
 Adafruit_SSD1306 display(OLED_RESET);
  
 #if (SSD1306_LCDHEIGHT != 64)
@@ -28,7 +31,7 @@ unsigned long tempoBomba = 0;
 int bomba1 = 10;
 int bomba2 = 9;
 
-long tempoParaLigar = 30000;
+long tempoParaLigar = 60000;
 long tempoLigado = 30000;
 
 int estadoBomba = 0;          // Estado da bomba (0 = desligado, 1 = ligado)
@@ -44,15 +47,15 @@ void setup()
   pinMode(pinoBotao, INPUT_PULLUP);// Configura o pino do botão como entrada com pull-up interno
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  //Inicializa OLED com endereço I2C 0x3C (para 128x64)
+  display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(10,14);
-  display.clearDisplay();
-  display.print("CEEP IRRIGA");
+  display.setCursor(0,4);
+  display.print("CEEP");
+  display.setCursor(0,20);
+  display.print("IRRIGA");
   display.display(); 
   delay(2000);
-  
-
 }
 
 
@@ -163,7 +166,7 @@ sprintf(tempoFormatado, "%02d:%02d:%02d", hours, minutes, seconds);
   display.setTextColor(WHITE);
   display.setCursor(10,4);
   display.clearDisplay();
-  display.print("Bomba Desligada");
+  display.print("Desligada");
   display.setCursor(0,20);
   display.print(tempoFormatado);
   display.display();
@@ -186,9 +189,9 @@ sprintf(tempoFormatado, "%02d:%02d:%02d", hours, minutes, seconds);
 
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(10,4);
+  display.setCursor(10,7);
   display.clearDisplay();
-  display.print("Bomba Ligada");
+  display.print("Ligada");
   display.setCursor(0,20);
   display.print(tempoFormatado);
   display.display();
@@ -206,9 +209,9 @@ sprintf(tempoFormatado, "%02d:%02d:%02d", hours, minutes, seconds);
 
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(10,4);
+  display.setCursor(10,7);
   display.clearDisplay();
-  display.print("Bomba Ligada");
+  display.print("Ligada");
   display.setCursor(0,20);
   display.print(tempoFormatado);
   display.display();
